@@ -29,6 +29,3 @@ class LinkStorageInterface(ABC):
     @abstractmethod
     def delete_link_by_title(title):
         pass
-
-
-    

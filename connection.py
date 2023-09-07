@@ -1,12 +1,20 @@
 import pyrebase
 
 
-config={}
+config={
+  'apiKey': "AIzaSyDPJsywvUXWTosCTFRkftTXTr36SJS5wtY",
+  'authDomain': "python-8ecab.firebaseapp.com",
+  'databaseURL': "https://python-8ecab-default-rtdb.firebaseio.com",
+  'projectId': "python-8ecab",
+  'storageBucket': "python-8ecab.appspot.com",
+  'messagingSenderId': "562078592422",
+  'appId': "1:562078592422:web:1e52ce41c9f1ce71eef367"
+}
 
 firebase=pyrebase.initialize_app(config)
 auth=firebase.auth()
 db = firebase.database()
-
+newUser = None
 def login():
     print('login:')
     email = input('Email: ')
@@ -15,6 +23,7 @@ def login():
         user = auth.sign_in_with_email_and_password(email,password)
         if user:
             print('success')
+            newUser = user
             return user
         else:
             print('login fail')
@@ -36,7 +45,7 @@ def signup():
     email = input('Email: ')
     password = input('Password: ')
     try:
-        user = auth.create_user_with_email_and_password(email,password)
+        user = auth.create_user_with_email_and_password(email,password)    
         print('Successfully')
         return user
     except Exception as e:
@@ -50,4 +59,11 @@ def signup():
         return None
     
 #signup()
-
+#redefine password
+def redefinePass():
+    email = input('Email to redefine: ')
+    try:
+        redefine = auth.send_password_reset_email(email)
+        return redefine
+    except Exception as e:
+        print('Failed. Something happened.')
