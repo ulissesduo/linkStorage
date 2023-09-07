@@ -1,0 +1,14 @@
+This application is a simple console CRUD - (Create, Read, Update and Delete) to get easier management of your links that you want to save and check it later.
+
+The technologies used for this project was Python and Firebase Real Time Database.
+
+I've decided to structure the application separating the concerns of user interaction, actions methods, interface and connection to Firebase with signin and signup. It makes the code with correct separation of concerns, more modularized and easier to maintenace and create new functionalities.
+
+For now it brings a simple CRUD operations. The user can execute the actions bellow:
+    1. Create new link: this method is responsible to create a new record link with title, link itself and a group.
+        The main idea of these properties is to make it easier to search links by title because the link itself is too long and impossible to type or memorize it.
+        The groups is responsible to get together all the related links and execute queries to expose these related links at once for the user. This way the user can check all the related links easier without searching manually.
+    
+    2. Read links: this method is responsible to bring the entire list of links stored in database. It is a general search mechanism that gives to the user an entire view of all the links stored with all properties of them.
+
+    3. 

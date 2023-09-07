@@ -1,0 +1,53 @@
+import pyrebase
+
+
+config={}
+
+firebase=pyrebase.initialize_app(config)
+auth=firebase.auth()
+db = firebase.database()
+
+def login():
+    print('login:')
+    email = input('Email: ')
+    password = input('Password: ')
+    try:
+        user = auth.sign_in_with_email_and_password(email,password)
+        if user:
+            print('success')
+            return user
+        else:
+            print('login fail')
+    except Exception as e:
+        error_message = str(e)
+        if 'EMAIL_NOT_FOUND' in error_message:
+            print('Email not found')
+        elif 'INVALID_EMAIL' in error_message:
+            print('Email in invalid format')
+        elif 'INVALID_PASSWORD' in error_message:
+            print('Email or password invalid')
+        else:
+            print('Signup failed:', error_message)
+        return None
+    
+
+def signup():
+    print('singUp')
+    email = input('Email: ')
+    password = input('Password: ')
+    try:
+        user = auth.create_user_with_email_and_password(email,password)
+        print('Successfully')
+        return user
+    except Exception as e:
+        error_message = str(e)
+        if 'EMAIL_EXISTS' in error_message:
+            print('Email already exists. Please choose a different email.')
+        elif 'INVALID_EMAIL' in error_message:
+            print('Invalid email format. Please enter a valid email address.')
+        else:
+            print('Signup failed:', error_message)
+        return None
+    
+#signup()
+
