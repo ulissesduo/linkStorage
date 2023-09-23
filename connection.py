@@ -2,8 +2,17 @@ import pyrebase
 
 
 config={
-
+  'apiKey': "AIzaSyDPJsywvUXWTosCTFRkftTXTr36SJS5wtY",
+  'authDomain': "python-8ecab.firebaseapp.com",
+  'databaseURL': "https://python-8ecab-default-rtdb.firebaseio.com",
+  'projectId': "python-8ecab",
+  'storageBucket': "python-8ecab.appspot.com",
+  'messagingSenderId': "562078592422",
+  'appId': "1:562078592422:web:1e52ce41c9f1ce71eef367"
 }
+
+
+
 
 firebase=pyrebase.initialize_app(config)
 auth=firebase.auth()

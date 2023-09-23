@@ -2,6 +2,8 @@ from connection import db, signup, login, redefinePass
 from linkStorage import LinkStorage
 import subprocess
 import re
+import pyshorteners
+import argparse
 
 def main():
     user = None
@@ -13,7 +15,7 @@ def main():
             print("2. Login")
             print("3. Redefine password")
             print("4. Exit")
-            
+
             choice = input("Enter your choice: ")
 
             if choice == "1":
@@ -56,6 +58,9 @@ def main():
                     while not link.strip():  # Continue asking until a non-empty input is provided
                         print("Error: Link cannot be empty.")
                         link = input("Enter link: ")
+                    
+                    s = pyshorteners.Shortener()
+                    shortLink = s.tinyurl.short(link)
 
                     group = input("Enter group: ")
                     while not group.strip():  # Continue asking until a non-empty input is provided
@@ -74,7 +79,7 @@ def main():
                         title = input("Enter title: ")
                         
         # Call the create_link method with valid input
-                    link_storage.create_link(link, group, title)
+                    link_storage.create_link(shortLink, group, title)
 
             elif choice == "2":
                 links = link_storage.read_links()
@@ -113,11 +118,9 @@ def main():
                 group = input("Enter the group to search: ")
                 
                 if group.strip():  # Check if group is not empty or contains only whitespace
-                    linkSearch = link_storage.search_group(group)
-                    
-                    print("Debug: group =", group)
-                    print("Debug: linkSearch =", linkSearch)
-                    
+                    linkSearch = link_storage.search_group(group)                    
+                    # print("Debug: group =", group)
+                    # print("Debug: linkSearch =", linkSearch)                    
                     linkSearchData = linkSearch.val()  # Retrieve the data using .val()
                     
                     if linkSearchData:
